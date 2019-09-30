@@ -27,9 +27,3 @@ function startTimer() {
     document.getElementById("timer").innerHTML = min + ":" + sec;
     setTimeout(startTimer,1000);
 }
-
-window.onload = function () {
-    var trentesec = 6 * 5,
-        display = document.querySelector('#timer');
-    startTimer(trentesec, display);
-};
