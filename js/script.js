@@ -44,8 +44,8 @@ class Snake {
     for (var i = 0; i < this.x.length; i++) {
       context.beginPath();
       context.rect(this.x[i], this.y[i], this.tile_size, this.tile_size);
-      context.fillStyle   = '#2B823A';
-      context.strokeStyle = '#012E34';
+      context.fillStyle   = '#008000';
+      context.strokeStyle = '#000000';
       context.fill();
       context.stroke();
       context.closePath();
@@ -145,7 +145,7 @@ class Fruit {
   draw(context) {
     context.beginPath();
     context.arc(this.x + 5, this.y + 5, 5, 0, Math.PI * 2);
-    context.fillStyle = '#EDE916';
+    context.fillStyle = '#582900';
     context.fill();
     context.closePath();
   }
@@ -162,7 +162,7 @@ class Fruit {
 
 function canvaSnake() {
   // Init variable
-  var canvas      = document.getElementById('myCanvas');
+  var canvas      = document.getElementById('GameCanvas');
   var context     = canvas.getContext('2d');
   var message     = document.getElementById('message');
   var score_text  = document.getElementById('score');

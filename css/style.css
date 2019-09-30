@@ -1,0 +1,95 @@
+#background {
+  background-color: green;
+}
+
+h1 {
+  font-size: 40px;
+  color: white;
+  text-align: center;
+  font-family: Comic Sans MS;
+}
+
+h2 {
+  margin-top: 40px;
+  font-size: 26px;
+  color: white;
+  text-align: center;
+  font-family: Comic Sans MS;
+}
+
+#divscore {
+  font-size: 24px;
+  color: white;
+  text-align: center;
+}
+
+#score {
+  font-size: 28px;
+  color: #582900;
+  font-family: Comic Sans MC;
+  margin-left: 15px;
+  margin-right: 40px;
+}
+
+#bestscore {
+  font-size: 28px;
+  color: #582900;
+  font-family: Comic Sans MC;
+  margin-left: 15px;
+  margin-right: 40px;
+}
+
+#level {
+  font-size: 28px;
+  color: #582900;
+  font-family: Comic Sans MC;
+  margin-left: 15px;
+  margin-right: 40px;
+}
+
+#timer {
+  font-size: 28px;
+  color: #582900;
+  font-family: Comic Sans MC;
+  margin-left: 15px;
+  margin-right: 40px;
+}
+
+#message {
+  font-size: 28px;
+  color: white;
+  text-align: center;  
+}
+
+em {
+  color: #582900;
+}
+
+canvas {
+  padding: auto;
+  margin: auto;
+  width: 600px;
+  height: 400px;
+  background-color: white;
+  display: block;
+  border: 3px solid black;
+  border-radius: 12px;
+}
+
+#center {
+  text-align: center;
+}
+
+#blocA {
+  font-size: 20px;
+  float: left;
+  width: 40%;
+  color: white;
+  text-align: center;
+}
+#blocB {
+  font-size: 20px;
+  margin-left: 60%;
+  color: white;
+  text-align: center;
+}
