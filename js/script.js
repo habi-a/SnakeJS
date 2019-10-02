@@ -186,7 +186,6 @@ function canvaSnake() {
   document.addEventListener('game_win', gameWin, false);
   document.addEventListener('game_over', gameOver, false);
 
-
   // Handling inputs player
   function getInputDirection(e) {
     if (!new_game) {
@@ -296,3 +295,50 @@ function canvaSnake() {
     fruit.reset();
   }
 }
+
+// BONUS
+var gamepad = navigator.getGamepads()[0];
+var bola = document.getElementById('bola');
+var bx = 200;
+var by = 200;
+var mov = 10;
+console.log(gamepad);
+
+function GamePad(){
+  gamepad = navigator.getGamepads()[0];
+  var btn = gamepad.buttons;
+  if (btn[13].pressed) {
+    bx+=mov;
+    bola.style.top = bx+"px";
+    console.log(btn[15], "pressed");
+  }
+  if (btn[12].pressed) {
+    bx-=mov;
+    bola.style.top = bx+"px";
+    console.log(btn[14], "pressed");
+  }
+  if (btn[15].pressed) {
+    by+=mov;
+    bola.style.left = by+"px";
+    console.log(btn[12], "pressed");
+  }
+  if (btn[14].pressed) {
+    by-=mov;
+    bola.style.left = by+"px";
+    console.log(btn[13], "pressed");
+  }
+}
+setInterval(GamePad, 50);
+
+
+window.addEventListener('gamepadconnected', event => {
+  console.log('gamepad connected : ')
+  console.log(event.gamepad)
+})
+window.addEventListener('gamepaddisconnected', event => {
+  console.log('gamepad disconnected : ')
+  console.log(event.gamepad)
+})
+
+
+
