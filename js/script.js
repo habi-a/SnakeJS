@@ -12,7 +12,7 @@ class Snake {
   getSize() {
     return this.x.length;
   }
- 
+
   updateDirection(direction, speed) {
     if (this.velocity_x[0]) {
       switch(direction) {
@@ -123,7 +123,7 @@ class Fruit {
     this.width      = width / this.tile_size;
     this.height     = height / this.tile_size;
   }
-  
+
   generatePos(posX, posY) {
     var pos_taken = false;
     this.x = Fruit.getRandomInt(this.width);
@@ -144,7 +144,7 @@ class Fruit {
 
   draw(context) {
     context.beginPath();
-    context.arc(this.x + 5, this.y + 5, 5, 0, Math.PI * 2);
+    context.arc(this.x + this.tile_size / 2, this.y + this.tile_size / 2, this.tile_size / 2, 0, Math.PI * 2);
     context.fillStyle = '#582900';
     context.fill();
     context.closePath();
@@ -162,7 +162,7 @@ class Fruit {
 
 function canvaSnake() {
   // Time variables
-  var time_left = "00:10";
+  var time_left = "03:30";
   document.getElementById("timer").innerText = time_left;
   var timer = document.getElementById("timer").innerText;
   var arr = timer.split(":");
@@ -181,7 +181,7 @@ function canvaSnake() {
   var score       = 0;
   var level       = 1;
   var init_speed  = 1;
-  var tile_size   = 10;
+  var tile_size   = 6;
   var direction   = '';
   var playing     = false;
   var new_game    = true;
@@ -203,7 +203,7 @@ function canvaSnake() {
   function startTimer() {
     if (!playing)
       return;
-    
+
     var timer = document.getElementById("timer").innerText;
     var arr = timer.split(":");
     var min = arr[0];
@@ -263,7 +263,7 @@ function canvaSnake() {
         message.innerText = 'Go!';
         document.addEventListener('keydown', getInputDirection, false);
         fruit.generatePos(snake.x, snake.y);
-        anim_id = window.requestAnimationFrame(play);      
+        anim_id = window.requestAnimationFrame(play);
       }
     }
   }
@@ -279,7 +279,7 @@ function canvaSnake() {
     }
 
     snake.move();
-    
+
     if (snake.isEatingFruit(fruit.x, fruit.y)) {
       snake.pushBody(1);
       fruit.generatePos(snake.x, snake.y);
