@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mini-Snake</title>
+    <title>CanvaSnake</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
   </head>
-  <body id="background" onload="canvaSnake();startTimer();">
+  <body id="background" onload="canvaSnake();">
     <h1>Corabi the Snake</h1>
     <p id="divscore"> 
       Score: <span id="score">0</span>
-      Best Score: <span id="bestscore">0</span>
-      Level: <span id="level">0</span>
-      Timer: <span id="timer">00:30</span>
+      Level: <span id="level">1</span>
+      Timer: <span id="timer">00:00</span>
     </p>
     <canvas id="GameCanvas">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
     <p id="message"> Press <em>Space</em> to start Corabi the Snake</p>
@@ -19,7 +18,6 @@
     <div id="blocA">
       Snake =  <i class="fa fa-square"></i><br>
       Eats&nbsp;&nbsp; = &nbsp;<i class="fa fa-circle"></i><br>
-      Enemies =      <br>
     </div>
     <div id="blocB">
       Up&nbsp;&nbsp;&nbsp;&nbsp; = &nbsp;<i class="fa fa-arrow-up"></i><br>
@@ -27,7 +25,6 @@
       Right = &nbsp;<i class="fa fa-arrow-right"></i><br>
       Down  = &nbsp;<i class="fa fa-arrow-down"></i><br>
     </div>
-    <div id="bola"></div>
 	<script type="text/javascript" src="js/timer.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
   </body>

@@ -161,12 +161,22 @@ class Fruit {
 }
 
 function canvaSnake() {
-  // Init variable
+  // Time variables
+  var time_left = "00:10";
+  document.getElementById("timer").innerText = time_left;
+  var timer = document.getElementById("timer").innerText;
+  var arr = timer.split(":");
+  var min = arr[0];
+  var sec = arr[1];
+
+  // HTML Variables
   var canvas      = document.getElementById('GameCanvas');
   var context     = canvas.getContext('2d');
   var message     = document.getElementById('message');
   var score_text  = document.getElementById('score');
   var level_text  = document.getElementById('level');
+
+  // Game variables
   var anim_id     = 0;
   var score       = 0;
   var level       = 1;
@@ -176,15 +186,47 @@ function canvaSnake() {
   var playing     = false;
   var new_game    = true;
   var speed       = init_speed;
-  var game_win    = new Event('game_win');
-  var game_over   = new Event('game_over');
   var snake       = new Snake(canvas.width, canvas.height, tile_size, init_speed);
   var fruit       = new Fruit(canvas.width, canvas.height, tile_size);
 
-  // Create events
+  // Events
+  var gamepad     = navigator.getGamepads()[0];
+  var game_win    = new Event('game_win');
+  var game_over   = new Event('game_over');
+  var time_over   = new Event('time_over');
   document.addEventListener('keydown', gameStart, false);
   document.addEventListener('game_win', gameWin, false);
   document.addEventListener('game_over', gameOver, false);
+  document.addEventListener('time_over', timeOver, false);
+
+
+  function startTimer() {
+    if (!playing)
+      return;
+    
+    var timer = document.getElementById("timer").innerText;
+    var arr = timer.split(":");
+    var min = arr[0];
+    var sec = arr[1];
+
+    if (sec == 0) {
+      if (min == 0) {
+        document.dispatchEvent(time_over);
+        return;
+      }
+      min++;
+      if (min < 10)
+        min = "0" + min;
+      sec = 59;
+    }
+    else
+      sec--;
+    if (sec < 10)
+      sec = "0" + sec;
+
+    document.getElementById("timer").innerText = min + ":" + sec;
+    setTimeout(startTimer,1000);
+  }
 
   // Handling inputs player
   function getInputDirection(e) {
@@ -211,8 +253,14 @@ function canvaSnake() {
   function gameStart(e) {
     if (e.keyCode == 32) {
       if (!playing) {
-        playing           = true;
-        message.innerHTML = 'Go!';
+        document.getElementById("timer").innerText = time_left;
+        timer   = document.getElementById("timer").innerText;
+        arr     = timer.split(":");
+        min     = arr[0];
+        sec     = arr[1];
+        playing = true;
+        startTimer();
+        message.innerText = 'Go!';
         document.addEventListener('keydown', getInputDirection, false);
         fruit.generatePos(snake.x, snake.y);
         anim_id = window.requestAnimationFrame(play);      
@@ -269,7 +317,7 @@ function canvaSnake() {
   // Event game win
   function gameWin(e) {
     if (playing) {
-      message.innerHTML = 'You win! Press <em>Space</em> to start a new game';
+      message.innerText = 'You win! Press <em>Space</em> to start a new game';
       resetGame();
     }
   }
@@ -277,7 +325,15 @@ function canvaSnake() {
   // Event game over
   function gameOver(e) {
     if (playing) {
-      message.innerHTML = 'Game Over! Press <em>Space</em> to start a new game';
+      message.innerText = 'Game Over! Press <em>Space</em> to start a new game';
+      resetGame();
+    }
+  }
+
+  // Event game over
+  function timeOver(e) {
+    if (playing) {
+      message.innerText = 'Time is Over! Press <em>Space</em> to start a new game';
       resetGame();
     }
   }
@@ -297,14 +353,7 @@ function canvaSnake() {
 }
 
 // BONUS
-var gamepad = navigator.getGamepads()[0];
-var bola = document.getElementById('bola');
-var bx = 200;
-var by = 200;
-var mov = 10;
-console.log(gamepad);
-
-function GamePad(){
+/*function GamePad(){
   gamepad = navigator.getGamepads()[0];
   var btn = gamepad.buttons;
   if (btn[13].pressed) {
@@ -327,18 +376,4 @@ function GamePad(){
     bola.style.left = by+"px";
     console.log(btn[13], "pressed");
   }
-}
-setInterval(GamePad, 50);
-
-
-window.addEventListener('gamepadconnected', event => {
-  console.log('gamepad connected : ')
-  console.log(event.gamepad)
-})
-window.addEventListener('gamepaddisconnected', event => {
-  console.log('gamepad disconnected : ')
-  console.log(event.gamepad)
-})
-
-
-
+}*/
