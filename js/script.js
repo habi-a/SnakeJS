@@ -195,15 +195,14 @@ function canvaSnake() {
   var game_over   = new Event('game_over');
   var time_over   = new Event('time_over');
   document.addEventListener('keydown', gameStart, false);
+  window.addEventListener("gamepadconnected", gameStartGamepad, false);
   document.addEventListener('game_win', gameWin, false);
   document.addEventListener('game_over', gameOver, false);
   document.addEventListener('time_over', timeOver, false);
 
-
   function startTimer() {
     if (!playing)
       return;
-
     var timer = document.getElementById("timer").innerText;
     var arr = timer.split(":");
     var min = arr[0];
@@ -249,6 +248,27 @@ function canvaSnake() {
     }
   }
 
+  function getJoystickDirection(buttons) {
+    if (!new_game) {
+      if (buttons[15].pressed) {
+        direction = 'right';
+        console.log(buttons[15], "pressed");
+      }
+      else if (buttons[12].pressed) {
+        direction = 'up';
+        console.log(buttons[12], "pressed");
+      }
+      else if (buttons[14].pressed) {
+        direction = 'left'
+        console.log(buttons[14], "pressed");
+      }
+      else if (buttons[13].pressed) {
+        direction = 'down';
+        console.log(buttons[13], "pressed");
+      }
+    }
+  }
+
   // Event start game
   function gameStart(e) {
     if (e.keyCode == 32) {
@@ -268,8 +288,26 @@ function canvaSnake() {
     }
   }
 
+  function gameStartGamepad(e) {
+    if (!playing) {
+      document.getElementById("timer").innerText = time_left;
+      timer   = document.getElementById("timer").innerText;
+      arr     = timer.split(":");
+      min     = arr[0];
+      sec     = arr[1];
+      playing = true;
+      gamepad = navigator.getGamepads()[0];
+      startTimer();
+      message.innerText = 'Go!';
+      document.addEventListener('keydown', getInputDirection, false);
+      fruit.generatePos(snake.x, snake.y);
+      anim_id = window.requestAnimationFrame(play);
+    }
+  }
+
   // Main Loop
   function play() {
+    getJoystickDirection(gamepad.buttons);
     new_game = false;
     context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -354,26 +392,24 @@ function canvaSnake() {
 
 // BONUS
 /*function GamePad(){
-  gamepad = navigator.getGamepads()[0];
-  var btn = gamepad.buttons;
-  if (btn[13].pressed) {
+  if (buttons[13].pressed) {
     bx+=mov;
     bola.style.top = bx+"px";
-    console.log(btn[15], "pressed");
+    console.log(buttons[15], "pressed");
   }
-  if (btn[12].pressed) {
+  if (buttons[12].pressed) {
     bx-=mov;
     bola.style.top = bx+"px";
-    console.log(btn[14], "pressed");
+    console.log(buttons[14], "pressed");
   }
-  if (btn[15].pressed) {
+  if (buttons[15].pressed) {
     by+=mov;
     bola.style.left = by+"px";
-    console.log(btn[12], "pressed");
+    console.log(buttons[12], "pressed");
   }
-  if (btn[14].pressed) {
+  if (buttons[14].pressed) {
     by-=mov;
     bola.style.left = by+"px";
-    console.log(btn[13], "pressed");
+    console.log(buttons[13], "pressed");
   }
 }*/
