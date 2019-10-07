@@ -162,7 +162,7 @@ class Fruit {
 
 function canvaSnake() {
   // Time variables
-  var time_left = "03:30";
+  var time_left = "03:00";
   document.getElementById("timer").innerText = time_left;
   var timer = document.getElementById("timer").innerText;
   var arr = timer.split(":");
@@ -213,7 +213,7 @@ function canvaSnake() {
         document.dispatchEvent(time_over);
         return;
       }
-      min++;
+      min--;
       if (min < 10)
         min = "0" + min;
       sec = 59;
@@ -355,7 +355,7 @@ function canvaSnake() {
   // Event game win
   function gameWin(e) {
     if (playing) {
-      message.innerText = 'You win! Press <em>Space</em> to start a new game';
+      message.innerHTML = 'You win! Press <em>Space</em> to start a new game';
       resetGame();
     }
   }
@@ -363,7 +363,7 @@ function canvaSnake() {
   // Event game over
   function gameOver(e) {
     if (playing) {
-      message.innerText = 'Game Over! Press <em>Space</em> to start a new game';
+      message.innerHTML = 'Game Over! Press <em>Space</em> to start a new game';
       resetGame();
     }
   }
@@ -371,7 +371,7 @@ function canvaSnake() {
   // Event game over
   function timeOver(e) {
     if (playing) {
-      message.innerText = 'Time is Over! Press <em>Space</em> to start a new game';
+      message.innerHTML = 'Time is Over! Press <em>Space</em> to start a new game';
       resetGame();
     }
   }

@@ -83,13 +83,15 @@ canvas {
 #blocA {
   font-size: 20px;
   float: left;
-  width: 40%;
+  width: 25%;
+  margin-top: -420px;
   color: white;
   text-align: center;
 }
 #blocB {
   font-size: 20px;
-  margin-left: 60%;
+  margin-left: 75%;
+  margin-top: -400px;
   color: white;
   text-align: center;
 }
