@@ -279,6 +279,7 @@ function canvaSnake() {
         min     = arr[0];
         sec     = arr[1];
         playing = true;
+        gamepad = navigator.getGamepads()[0];
         startTimer();
         message.innerText = 'Go!';
         document.addEventListener('keydown', getInputDirection, false);
@@ -307,7 +308,8 @@ function canvaSnake() {
 
   // Main Loop
   function play() {
-    getJoystickDirection(gamepad.buttons);
+    if (gamepad)
+        getJoystickDirection(gamepad.buttons);
     new_game = false;
     context.clearRect(0, 0, canvas.width, canvas.height);
 
